@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+  <users>
+    <user id="user1" email="leo.gill@gmail.com">
+      <password>pass123</password>
+      <contacts>
+        <contactId>user2</contactId>
+      </contacts>
+    </user>
+    <user id="user2" email="baptiste.jamin@example.com">
+      <password>pass456</password>
+      <contacts/>
+    </user>
+  </users>
+  <groups/>
+  <messages>
+    <message id="msg1" from="user1" to="user2">
+      <content>Hello Baptiste! This is a test message.</content>
+      <timestamp>2025-07-10T10:00:00Z</timestamp>
+    </message>
+  <message id="msg1752058682290" from="user1" to="user2"><content>hello</content><timestamp>2025-07-09T10:58:02+00:00</timestamp></message><message id="msg1752058696354" from="user1" to="user2"><content>hey</content><timestamp>2025-07-09T10:58:16+00:00</timestamp></message></messages>
+</database>
