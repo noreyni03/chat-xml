@@ -1,15 +1,8 @@
-Absolument ! Voici une transformation de votre guide en un fichier README.md complet et bien structuré pour votre projet GitHub. Ce format utilise la syntaxe Markdown pour une meilleure lisibilité.
-
----
-
 # Chat-XML
 
 Chat-XML est une application de messagerie instantanée simple et légère. Sa particularité est d'utiliser un fichier XML comme base de données pour stocker les utilisateurs, les conversations et les messages, au lieu d'un système de gestion de base de données traditionnel (comme MySQL).
 
 Ce projet est une démonstration pratique de la manipulation de fichiers XML avec PHP en backend et de la communication asynchrone avec JavaScript (AJAX) en frontend.
-
-*(N'hésitez pas à ajouter ici une capture d'écran de votre application en action pour la rendre plus attractive !)*
-`![Aperçu de l'application Chat-XML](URL_DE_VOTRE_SCREENSHOT.png)`
 
 ## ✨ Fonctionnalités
 
