@@ -1,41 +1,289 @@
+<!--
+  Application Signal Chat - Fichier principal HTML
+  Structure :
+    - Login
+    - Sidebar (contacts, groupes, profil)
+    - Chat principal
+    - Modales (profil, ajout contact, image, etc)
+    - Footer (saisie message)
+  Chaque section est commentée pour faciliter la compréhension.
+-->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projet XML Chat</title>
+    <title>Signal Chat</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- LOGIN CONTAINER -->
     <div id="login-container">
-        <h2>Connexion</h2>
-        <form id="login-form">
-            <input type="email" id="email" placeholder="Email" required value="leo.gill@gmail.com">
-            <input type="password" id="password" placeholder="Mot de passe" required value="pass123">
-            <button type="submit">Se connecter</button>
-        </form>
-        <p id="login-error" class="error-message"></p>
+        <div class="login-card">
+            <div class="login-header">
+                <div class="signal-logo">📱</div>
+                <h2>Signal</h2>
+                <p>Messagerie sécurisée</p>
+            </div>
+            <form id="login-form">
+                <div class="input-group">
+                    <input type="email" id="email" placeholder="Email" required value="leo.gill@gmail.com">
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Mot de passe" required value="pass123">
+                </div>
+                <button type="submit" class="login-btn">Se connecter</button>
+                <p id="login-error" class="error-message"></p>
+                <button type="button" id="show-register-btn" class="link-btn">Créer un compte</button>
+            </form>
+        </div>
     </div>
 
+    <!-- CHAT CONTAINER -->
     <div id="chat-container" class="hidden">
-        <aside id="sidebar">
-            <div id="user-profile"></div>
-            <h3>Conversations</h3>
-            <ul id="conversations-list"></ul>
-        </aside>
-        <main id="chat-window">
-            <header id="chat-header">
-                Sélectionnez une conversation
-            </header>
-            <div id="messages-area">
+        <!-- SIDEBAR : Barre latérale avec contacts, groupes, profil utilisateur -->
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <div id="user-profile" class="user-profile">
+                    <img id="profile-avatar" src="/placeholder.svg" alt="Avatar" class="avatar">
+                    <div class="user-info">
+                        <span id="profile-name" class="user-name"></span>
+                        <span class="user-status">En ligne</span>
+                    </div>
+                    <button id="edit-profile-btn" class="profile-edit-btn">⚙️</button>
                 </div>
-            <footer id="message-input-area">
-                <form id="message-form">
-                    <input type="text" id="message-input" placeholder="Écrivez votre message..." autocomplete="off">
-                    <button type="submit">Envoyer</button>
+                
+                <div class="search-bar">
+                    <input type="text" id="sidebar-search-input" class="search-input" placeholder="Rechercher...">
+                    <span class="search-icon">🔍</span>
+                </div>
+
+                <div class="sidebar-tabs">
+                    <button class="tab-btn active" data-tab="conversations">Discussions</button>
+                    <button class="tab-btn" data-tab="groups">Groupes</button>
+                </div>
+            </div>
+
+            <div class="sidebar-content">
+                <div id="conversations-section" class="tab-content active">
+                    <div id="conversations-list" class="contacts-list"></div>
+                </div>
+                
+                <div id="groups-section" class="tab-content">
+                    <div class="section-header">
+                        <button id="create-group-btn" class="create-group-btn">+ Nouveau groupe</button>
+                    </div>
+                    <ul id="groups-list" class="contacts-list"></ul>
+                </div>
+            </div>
+
+            <button id="add-contact-btn" class="add-contact-fab">+</button>
+        </aside>
+
+        <!-- CHAT WINDOW : Zone principale de chat (messages, header, etc) -->
+        <main id="chat-window" class="chat-container">
+            <header id="chat-header" class="chat-header" style="display: none;">
+                <div class="chat-avatar-container">
+                    <div class="avatar" id="chat-avatar">A</div>
+                </div>
+                <div class="chat-info">
+                    <div class="chat-title" id="chat-title">Sélectionner une conversation</div>
+                    <div class="chat-subtitle" id="chat-subtitle">Cliquez sur un contact pour commencer</div>
+                </div>
+                <div class="chat-actions">
+                    <button class="action-btn" id="search-toggle-btn" title="Rechercher">🔍</button>
+                    <button class="action-btn" id="group-settings-btn" title="Paramètres du groupe" style="display: none;">⚙️</button>
+                    <button class="action-btn" title="Plus d'options">⋮</button>
+                </div>
+            </header>
+
+            <div id="search-area" class="search-area hidden">
+                <form id="search-form" class="search-form">
+                    <input type="text" id="search-input" class="message-search-input" placeholder="Rechercher un message...">
+                    <button type="submit" class="search-btn">🔍</button>
+                </form>
+            </div>
+
+            <div id="messages-area" class="messages-area">
+                <div class="welcome-message">
+                    <div class="welcome-icon">💬</div>
+                    <h2>Bienvenue sur Signal</h2>
+                    <p>Sélectionnez une conversation pour commencer à discuter</p>
+                </div>
+            </div>
+
+            <footer id="message-input-area" class="message-input-area" style="display: none;">
+                <form id="message-form" class="message-form">
+                    <input type="file" id="file-input" class="file-input" accept="*/*">
+                    <button type="button" class="attachment-btn" onclick="document.getElementById('file-input').click()">📎</button>
+                    <!-- Aperçu image + légende intégré dans la zone de saisie -->
+                    <div id="image-preview-container" style="display:none; flex-direction:column; align-items:flex-start; margin-bottom:8px; width:100%;">
+                        <img id="image-preview" src="" style="max-width:180px; max-height:180px; border-radius:8px; margin-bottom:6px; box-shadow:0 2px 8px rgba(0,0,0,0.15);" />
+                        <input type="text" id="image-caption" class="message-input" placeholder="Ajouter une légende..." style="width:100%; margin-bottom:4px;" />
+                    </div>
+                    <input type="text" id="message-input" class="message-input" placeholder="Écrivez votre message..." autocomplete="off">
+                    <button type="submit" class="send-btn">➤</button>
                 </form>
             </footer>
         </main>
+        <!-- Aperçu image façon WhatsApp (modale) -->
+        <div id="image-modal" class="modal hidden">
+            <div class="modal-content image-modal-content">
+                <span id="close-image-modal" class="close-btn">×</span>
+                <img id="modal-image-preview" src="" alt="Aperçu" style="display:none;" />
+                <div id="modal-file-info" style="display:none; flex-direction:column; align-items:center; margin-bottom:16px;">
+                    <div id="modal-file-icon" style="font-size:64px; margin-bottom:8px;">📄</div>
+                    <div id="modal-file-name" style="font-size:16px; color:var(--text-secondary); word-break:break-all;"></div>
+                </div>
+                <input type="text" id="modal-image-caption" class="message-input" placeholder="Ajouter une légende..." />
+                <div class="modal-actions">
+                    <button id="send-image-btn" class="primary-btn">Envoyer</button>
+                    <button id="cancel-image-btn" class="danger-btn">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALS : Fenêtres modales pour profil, ajout contact, image, etc -->
+    <!-- Register Modal -->
+    <div id="register-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Créer un compte</h2>
+                <button type="button" id="close-register-modal" class="close-btn">×</button>
+            </div>
+            <form id="register-form">
+                <div class="form-group">
+                    <label>Nom d'affichage</label>
+                    <input type="text" id="register-displayName" placeholder="Nom d'affichage" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="register-email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <label>Mot de passe</label>
+                    <input type="password" id="register-password" placeholder="Mot de passe" required>
+                </div>
+                <div class="form-group">
+                    <label>Avatar (optionnel)</label>
+                    <input type="file" id="register-avatar" accept="image/*">
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="primary-btn">S'inscrire</button>
+                </div>
+            </form>
+            <p id="register-error" class="error-message"></p>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profile-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Mon profil</h2>
+                <button type="button" id="close-profile-modal" class="close-btn">×</button>
+            </div>
+            <form id="profile-form">
+                <div class="profile-avatar-section">
+                    <img id="modal-avatar" src="/placeholder.svg" alt="Avatar" class="profile-avatar-large">
+                    <input type="file" id="avatar-input" accept="image/*" class="file-input">
+                    <button type="button" class="change-avatar-btn" onclick="document.getElementById('avatar-input').click()">Changer l'avatar</button>
+                </div>
+                <div class="form-group">
+                    <label>Nom d'affichage</label>
+                    <input type="text" id="display-name-input" placeholder="Nom d'affichage">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email-input" disabled>
+                </div>
+                <div class="form-group">
+                    <label>Nouveau mot de passe</label>
+                    <input type="password" id="password-input" placeholder="Nouveau mot de passe">
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="primary-btn">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Contact Modal -->
+    <div id="add-contact-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Ajouter un contact</h2>
+                <button type="button" id="close-add-contact-modal" class="close-btn">×</button>
+            </div>
+            <form id="add-contact-form">
+                <div class="form-group">
+                    <label>Nom</label>
+                    <input type="text" id="add-contact-name" placeholder="Nom du contact" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="add-contact-email" placeholder="Email du contact" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="primary-btn">Ajouter</button>
+                </div>
+            </form>
+            <p id="add-contact-result" class="error-message"></p>
+        </div>
+    </div>
+
+    <!-- Create Group Modal -->
+    <div id="create-group-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Créer un groupe</h2>
+                <button type="button" id="close-group-modal" class="close-btn">×</button>
+            </div>
+            <form id="create-group-form">
+                <div class="form-group">
+                    <label>Nom du groupe</label>
+                    <input type="text" id="group-name" placeholder="Nom du groupe" required>
+                </div>
+                <div class="form-group">
+                    <label>Membres</label>
+                    <div id="members-checkboxes" class="members-checkboxes"></div>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="primary-btn">Créer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Group Settings Modal -->
+    <div id="group-settings-modal" class="modal hidden">
+        <div class="modal-content group-settings-content">
+            <div class="modal-header">
+                <div class="group-info-header">
+                    <div class="avatar group" id="modal-group-avatar">G</div>
+                    <div>
+                        <h2 id="modal-group-name">Paramètres du groupe</h2>
+                        <p id="modal-group-members-count">0 membres</p>
+                    </div>
+                </div>
+                <button type="button" id="close-group-settings-modal" class="close-btn">×</button>
+            </div>
+            
+            <div class="group-settings-body">
+                <div class="members-section">
+                    <div class="section-title">
+                        👥 Membres
+                    </div>
+                    <button id="add-group-member-btn" class="add-member-btn">+ Ajouter un membre</button>
+                    <div id="group-members-list" class="members-list"></div>
+                </div>
+
+                <div class="group-actions">
+                    <button id="delete-group-btn" class="danger-btn">🗑️ Supprimer le groupe</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>

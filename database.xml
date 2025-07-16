@@ -3,20 +3,40 @@
   <users>
     <user id="user1" email="leo.gill@gmail.com">
       <password>pass123</password>
+      <displayName/>
+      <avatar/>
       <contacts>
         <contactId>user2</contactId>
-      </contacts>
+      <contactId>user3</contactId><contactId>user4</contactId></contacts>
     </user>
     <user id="user2" email="baptiste.jamin@example.com">
       <password>pass456</password>
+      <displayName/>
+      <avatar/>
+      <contacts/>
+    </user>
+    <user id="user3" email="og@example.com">
+      <password>pass4562</password>
+      <displayName/>
+      <avatar/>
+      <contacts/>
+    </user>
+    <user id="user4" email="og3@example.com">
+      <password>pass4562</password>
+      <displayName/>
+      <avatar/>
       <contacts/>
     </user>
   </users>
-  <groups/>
+  <contacts>
+    <!-- Exemple : <contact><id>1</id><nom>Ali</nom><numero>+221...</numero></contact> -->
+  <contact><id>1</id><nom>Tapha</nom><numero>og@example.com</numero></contact><contact><id>2</id><nom>Papa</nom><numero>og3@example.com</numero></contact></contacts>
+  
+  <groups><group id="group1752598599155" admin="user1"><name>teste creation</name><members><memberId>user2</memberId><memberId>user1</memberId><memberId>user4</memberId></members></group><group id="group1752603739906" admin="user1"><name>ee</name><members><memberId>user2</memberId><memberId>user1</memberId></members></group></groups>
   <messages>
-    <message id="msg1" from="user1" to="user2">
+    <message id="msg1" from="user1" to="user2" status="read">
       <content>Hello Baptiste! This is a test message.</content>
       <timestamp>2025-07-10T10:00:00Z</timestamp>
     </message>
-  <message id="msg1752058682290" from="user1" to="user2"><content>hello</content><timestamp>2025-07-09T10:58:02+00:00</timestamp></message><message id="msg1752058696354" from="user1" to="user2"><content>hey</content><timestamp>2025-07-09T10:58:16+00:00</timestamp></message></messages>
+  <message id="msg1752058682290" from="user1" to="user2" status="read"><content>hello</content><timestamp>2025-07-09T10:58:02+00:00</timestamp></message><message id="msg1752058696354" from="user1" to="user2" status="read"><content>hey</content><timestamp>2025-07-09T10:58:16+00:00</timestamp></message><message id="msg1752569601425" from="user1" to="user2" status="read"><content>bonjour</content><timestamp>2025-07-15T08:53:21+00:00</timestamp></message><message id="msg1752598618683" from="user1" to="group1752598599155" status="read"><content>bonjour</content><timestamp>2025-07-15T16:56:58+00:00</timestamp></message><message id="msg1752598765225" from="user2" to="group1752598599155" status="read"><content/><file>uploads/file_687688ed7ca0d.jpg</file><timestamp>2025-07-15T16:59:25+00:00</timestamp></message><message id="msg1752598770430" from="user2" to="group1752598599155" status="read"><content>w</content><timestamp>2025-07-15T16:59:30+00:00</timestamp></message><message id="msg1752599299914" from="user1" to="user2" status="read"><content>mnan,a</content><timestamp>2025-07-15T17:08:19+00:00</timestamp></message><message id="msg1752603938285" from="user1" to="group1752603739906" status="delivered"><content>bonjour</content><timestamp>2025-07-15T18:25:38+00:00</timestamp></message><message id="msg1752604029760" from="user1" to="group1752598599155" status="read"><content>tres bien</content><timestamp>2025-07-15T18:27:09+00:00</timestamp></message><message id="msg1752604173579" from="user1" to="group1752603739906" status="sent"><content>salut</content><timestamp>2025-07-15T18:29:33+00:00</timestamp></message><message id="msg1752604314538" from="user1" to="group1752603739906" status="sent"><content>qeerq</content><timestamp>2025-07-15T18:31:54+00:00</timestamp></message><message id="msg1752606249208" from="user1" to="user3" status="sent"><content>fils</content><timestamp>2025-07-15T19:04:09+00:00</timestamp></message><message id="msg1752606780417" from="user3" to="user1" status="read"><content>nkm</content><timestamp>2025-07-15T19:13:00+00:00</timestamp></message><message id="msg1752606803703" from="user1" to="user3" status="sent"><content>nice</content><timestamp>2025-07-15T19:13:23+00:00</timestamp></message><message id="msg1752606863268" from="user3" to="user1" status="read"><content/><file>uploads/file_6876a88f636ad.png</file><timestamp>2025-07-15T19:14:23+00:00</timestamp></message><message id="msg1752607051560" from="user2" to="user1" status="read"><content>pour</content><timestamp>2025-07-15T19:17:31+00:00</timestamp></message><message id="msg1752607221582" from="user1" to="user3" status="sent"><content>visa</content><timestamp>2025-07-15T19:20:21+00:00</timestamp></message><message id="msg1752623726479" from="user1" to="user2" status="read"><content/><file>uploads/file_6876ea6ec35c6.png</file><timestamp>2025-07-15T23:55:26+00:00</timestamp></message><message id="msg1752623856912" from="user2" to="user1" status="read"><content>merci</content><timestamp>2025-07-15T23:57:36+00:00</timestamp></message><message id="msg1752654838206" from="user1" to="user4" status="read"><content>salut</content><timestamp>2025-07-16T08:33:58+00:00</timestamp></message><message id="msg1752654917425" from="user4" to="user1" status="read"><content>cv?</content><timestamp>2025-07-16T08:35:17+00:00</timestamp></message><message id="msg1752655352139" from="user4" to="group1752598599155" status="read"><content/><file>uploads/file_687765f8e16e8.png</file><timestamp>2025-07-16T08:42:32+00:00</timestamp></message><message id="msg1752655377385" from="user4" to="group1752598599155" status="read"><content>bonjour</content><timestamp>2025-07-16T08:42:57+00:00</timestamp></message><message id="msg1752658239363" from="user1" to="user3" status="sent"><content>mn</content><file>uploads/file_6877713f8b2b8.png</file><timestamp>2025-07-16T09:30:39+00:00</timestamp></message></messages>
 </database>
